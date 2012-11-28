@@ -27,6 +27,48 @@ def blogs( request ):
     }
     return render( request, 'account/list-blogs.html', data )
 
+
+@login_required
+def addblogpost( request ):
+    from blogs.models import BlogsPost
+
+    if request.session.get( 'blogs-post-draft-id', '' ) and int( request.session['blogs-post-draft-id'] ) > 0:
+        return redirect( 'account-editblogpost', id = request.session['blogs-post-draft-id'] )
+    else:
+        post = BlogsPost( status = 'draft', author = User.objects.get( pk = request.user.id ) )
+        post.save()
+        request.session['blogs-post-draft-id'] = post.id
+        return redirect( 'account-editblogpost', id = post.id )
+
+@login_required
+def editblogpost( request, id ):
+    from blogs.models import BlogsBlog, BlogsPost
+    from blogs.forms import BlogsPostEditForm, BlogsImageUploadForm
+
+    id = int( id )
+
+    try:
+        post = BlogsPost.objects.get( pk = id )
+    except BlogsPost.DoesNotExist:
+        raise Http404
+
+    user = User.objects.get( pk = request.user.id )
+
+    form = BlogsPostEditForm( instance = post )
+
+    data = {
+        'post':post,
+        'image_upload_form':BlogsImageUploadForm( initial = {'post':post} ),
+        'form':form,
+    }
+    return render( request, 'account/edit-post.html', data )
+
+
+@login_required
+def deleteblogpost( request, id ):
+    data = {}
+    return render( request, 'account/list-blogs.html', data )
+
 @login_required
 def addblog( request ):
     from blogs.models import BlogsBlog

@@ -1,0 +1,36 @@
+{% extends "template.html" %}
+
+{% block wrapper %}
+    <div class="container">
+        <div class="row">
+            <div class="span3">
+                <div>
+                    <ul class="nav nav-list">
+                        
+                        <li class="nav-header">Blogs</li>                        
+                        <li>
+                            <a href="{% url account-blogs %}">My Blogs</a>
+                            <ul class="nav nav-list">
+                                <li><a href="{% url account-addblog %}">add blog</a></li>
+                                <li><a href="{% url blogs-add-post %}">add post</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-header">Account</li>
+                        <li>
+                            <ul class="nav nav-list">
+                                <li class="nav-header">Settings</li>
+                                <li><a href="#">Avatar</a></li>
+                                <li><a href="#">Password</a></li>                       
+                            </ul>                            
+                        </li>                                               
+                    </ul>
+                </div>
+            </div>
+            <div class="span9">
+                <div class="content">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends "account/_account.html" %}
+
+{% load bootstrap %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <div class="well">
+                    <form action="" method="post">
+                        {{ form|bootstrap }}
+                        <div class="form-actions">
+                            {% csrf_token %}
+                            {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                            {% endfor %}
+                            <input type="submit" value="submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="well">
+                    <form action="{% url blogs-ajax-image-upload %}" id="image-upload-form" method="post" enctype="multipart/form-data">
+                        {{ image_upload_form|bootstrap }}
+                        <div class="form-actions">
+                            {% csrf_token %}
+                            {% for hidden in image_upload_form.hidden_fields %}
+                                {{ hidden }}
+                            {% endfor %}
+                            <input type="submit" value="submit">
+                        </div>
+                    </form>
+                </div>
+                <div class="well" id="post-images">
+                    <ul class="thumbnails">
+                        {% for image in images %}
+                            {% if image %}
+                            <li data-id="{{ image.id }}" data-x450="{{ image.x450.url }}" >
+                                <a href="#" class="thumbnail">
+                                    <img src="{{ image.x138.url }}" data-x450="{{ image.x450.url }}" />
+                                </a>
+                            </li>
+                            {% endif %}
+                        {% empty %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer_code %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/plugins/jquery.form.js"></script>
+    <script type="text/javascript">
+        ;(function($){
+            "use strict";
+            $(function(){
+                $('#image-upload-form').ajaxForm({                                                                                                                                                                  
+                    success:function(data){
+                        
+                        $('#post-images .thumbnails').prepend(function(){
+                            return $('<li/>')
+                                .data('id', data.image.id)
+                                .data('x450', data.image.x450)
+                                .append(function(){
+                                    return $('<a href="#" class="thumbnail"/>')
+                                        .append(function(){
+                                            return $('<img/>')
+                                                .attr('src', data.image.x138);
+                                        });
+                                });
+                        });
+                    }
+                });
+                
+                $('#post-images li')
+                    .live('mouseenter', function(){
+                        var self = $(this);
+                        $(this)                            
+                            .append(function(){
+                                if( ! $('.image-link-block', $(this)).size())                                    
+                                {
+                                    var d = $('<div class="image-link-block" />')
+                                        .append(function(){
+                                            return $('<a class="btn" />')
+                                                .text('insert')
+                                                .on('click', function(){
+                                                    tinymce.execCommand('mceInsertContent', false, '<img src="'+self.data('x450')+'" alt="" class="post-image" />');
+                                                });
+                                        })
+                                        .append(function(){
+                                            return $('<a class="btn" />')
+                                                .text('primary')
+                                                .on('click', function(){
+                                                    $.post('{% url catalog-ajax-primary %}', {
+                                                        post_id:'{{ post.id }}',
+                                                        image_id:self.data('id'),
+                                                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                    }, function(data){
+                                                        
+                                                    });
+                                                });
+                                        })
+                                        .append(function(){
+                                            return $('<a class="btn" />')
+                                                .text('delete')
+                                        });
+                                        
+                                    return d;
+                                }
+                            });
+                    })
+                    .live('mouseleave', function(){                        
+                        if( $('.image-link-block', $(this)).size() )
+                        {
+                            $('.image-link-block', $(this)).remove();
+                        }
+                    });
+
+                $('#post-images').find('img').live('click', function(){
+                    tinymce.execCommand('mceInsertContent', false, '<img src="'+$(this).data('x450')+'" alt="" class="post-image" />');                
+                })
+            });
+        })(jQuery || django.jQuery);
+    </script>
+{% endblock %}
