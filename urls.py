@@ -12,5 +12,7 @@ urlpatterns = patterns( 'account',
     url( r'^addblog/$', 'blog.addblog', name = 'account-addblog' ),
     url( r'^editblog/(?P<id>\d+)$', 'blog.editblog', name = 'account-editblog' ),
     url( r'^deleteblog/(?P<id>\d+)$', 'blog.deleteblog', name = 'account-deleteblog' ),
+
+    url( r'^settings/avatar/', 'settings.avatar', name='account-settings-avatar' ),
  )
 
