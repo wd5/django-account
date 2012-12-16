@@ -21,7 +21,7 @@
             </div>
             <div class="span4">
                 <div class="well">
-                    <form action="{% url blogs-ajax-image-upload %}" id="image-upload-form" method="post" enctype="multipart/form-data">
+                    <form action="{% url 'blogs-ajax-image-upload' %}" id="image-upload-form" method="post" enctype="multipart/form-data">
                         {{ image_upload_form|bootstrap }}
                         <div class="form-actions">
                             {% csrf_token %}
@@ -93,7 +93,7 @@
                                             return $('<a class="btn" />')
                                                 .text('primary')
                                                 .on('click', function(){
-                                                    $.post('{% url catalog-ajax-primary %}', {
+                                                    $.post('{% url 'catalog-ajax-primary' %}', {
                                                         post_id:'{{ post.id }}',
                                                         image_id:self.data('id'),
                                                         csrfmiddlewaretoken: '{{ csrf_token }}'
