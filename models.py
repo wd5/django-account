@@ -45,3 +45,23 @@ class Account(models.Model):
             'progressive':True,
         },
     )
+    x200 = ImageSpecField( [
+            Adjust( contrast = 1.2, sharpness = 1.1 ),
+            ResizeToFit( 200, 200 )
+        ],
+        image_field = 'avatar',
+        options = {
+            'quality': 90,
+            'progressive':True,
+        },
+    )
+    x250 = ImageSpecField( [
+            Adjust( contrast = 1.2, sharpness = 1.1 ),
+            ResizeToFit( 250, 250 )
+        ],
+        image_field = 'avatar',
+        options = {
+            'quality': 90,
+            'progressive':True,
+        },
+    )
