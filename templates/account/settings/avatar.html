@@ -1,5 +1,17 @@
 {% extends 'account/_account.html' %}
 
+{% load bootstrap %}
+{% load i18n %}
+
 {% block content %}
-    asdfadsfad
+    <form action="" method="post" enctype="multipart/form-data" class="form-inline">
+		{{ form|bootstrap }}
+        <div class="form-actions">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            <input type="submit" value="{% trans 'submit' %}" class="btn">
+        </div>
+    </form>
 {% endblock %}
