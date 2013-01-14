@@ -2,17 +2,17 @@ from django.conf.urls import patterns, include, url
 
 # (?P<year>\d{4})
 urlpatterns = patterns( 'account',
-    url( r'^$', 'views.home', name = 'account-home' ),
+    url( r'^$', 'views.home', name = 'home' ),
 
-    url( r'^blogs/$', 'blog.blogs', name = 'account-blogs' ),
-    url( r'^addblogpost/$', 'blog.addblogpost', name = 'account-addblogpost' ),
-    url( r'^editblogpost/(?P<id>\d+)$', 'blog.editblogpost', name = 'account-editblogpost' ),
-    url( r'^deleteblogpost/(?P<id>\d+)$', 'blog.deleteblogpost', name = 'account-deleteblogpost' ),
+    url( r'^blogs/$', 'blog.blogs', name = 'blogs' ),
+    url( r'^addblogpost/$', 'blog.addblogpost', name = 'blog-add-post' ),
+    url( r'^editblogpost/(?P<id>\d+)$', 'blog.editblogpost', name = 'blog-edit-post' ),
+    url( r'^deleteblogpost/(?P<id>\d+)$', 'blog.deleteblogpost', name = 'blog-delete-post' ),
 
-    url( r'^addblog/$', 'blog.addblog', name = 'account-addblog' ),
-    url( r'^editblog/(?P<id>\d+)$', 'blog.editblog', name = 'account-editblog' ),
-    url( r'^deleteblog/(?P<id>\d+)$', 'blog.deleteblog', name = 'account-deleteblog' ),
+    url( r'^addblog/$', 'blog.addblog', name = 'blog-add' ),
+    url( r'^editblog/(?P<id>\d+)$', 'blog.editblog', name = 'blog-edit' ),
+    url( r'^deleteblog/(?P<id>\d+)$', 'blog.deleteblog', name = 'blog-delete' ),
 
-    url( r'^settings/avatar/', 'settings.avatar', name='account-settings-avatar' ),
+    url( r'^settings/avatar/', 'settings.avatar', name='settings-avatar' ),
  )
 

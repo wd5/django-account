@@ -33,12 +33,12 @@ def addblogpost( request ):
     from blogs.models import BlogsPost
 
     if request.session.get( 'blogs-post-draft-id', '' ) and int( request.session['blogs-post-draft-id'] ) > 0:
-        return redirect( 'account-editblogpost', id = request.session['blogs-post-draft-id'] )
+        return redirect( 'account:blog-edit-post', id = request.session['blogs-post-draft-id'] )
     else:
         post = BlogsPost( status = 'draft', author = User.objects.get( pk = request.user.id ) )
         post.save()
         request.session['blogs-post-draft-id'] = post.id
-        return redirect( 'account-editblogpost', id = post.id )
+        return redirect( 'account:blog-edit-post', id = post.id )
 
 @login_required
 def editblogpost( request, id ):
@@ -74,7 +74,7 @@ def addblog( request ):
     from blogs.models import BlogsBlog
 
     if request.session.get( 'blogs-blog-draft-id', '' ) and int( request.session['blogs-blog-draft-id'] ) > 0:
-        return redirect( 'account-editblog', id = request.session['blogs-blog-draft-id'] )
+        return redirect( 'account:blog-edit', id = request.session['blogs-blog-draft-id'] )
     else:
         blog = BlogsBlog( 
             author = User.objects.get( 
@@ -83,7 +83,7 @@ def addblog( request ):
         )
         blog.save()
         request.session['blogs-blog-draft-id'] = blog.id
-        return redirect( 'account-editblog', id = blog.id )
+        return redirect( 'account:blog-edit', id = blog.id )
 
 @login_required
 def editblog( request, id ):

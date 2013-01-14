@@ -9,17 +9,17 @@
                         
                         <li class="nav-header">Blogs</li>                        
                         <li>
-                            <a href="{% url 'account-blogs' %}">My Blogs</a>
+                            <a href="{% url 'account:blogs' %}">My Blogs</a>
                             <ul class="nav nav-list">
-                                <li><a href="{% url 'account-addblog' %}">add blog</a></li>
-                                <li><a href="{% url 'blogs-add-post' %}">add post</a></li>
+                                <li><a href="{% url 'account:blog-add' %}">add blog</a></li>
+                                <li><a href="{% url 'account:blog-add-post' %}">add post</a></li>
                             </ul>
                         </li>
                         <li class="nav-header">Account</li>
                         <li>
                             <ul class="nav nav-list">
                                 <li class="nav-header">Settings</li>
-                                <li><a href="{% url 'account-settings-avatar' %}">Avatar</a></li>
+                                <li><a href="{% url 'account:settings-avatar' %}">Avatar</a></li>
                                 <li><a href="#">Password</a></li>                       
                             </ul>                            
                         </li>                                               

@@ -32,7 +32,7 @@ def addblog( request ):
     from blogs.models import BlogsBlog
 
     if request.session.get( 'blogs-blog-draft-id', '' ) and int( request.session['blogs-blog-draft-id'] ) > 0:
-        return redirect( 'account-editblog', id = request.session['blogs-blog-draft-id'] )
+        return redirect( 'account:blog-edit', id = request.session['blogs-blog-draft-id'] )
     else:
         blog = BlogsBlog( 
             author = User.objects.get( 
@@ -41,7 +41,7 @@ def addblog( request ):
         )
         blog.save()
         request.session['blogs-blog-draft-id'] = blog.id
-        return redirect( 'account-editblog', id = blog.id )
+        return redirect( 'account:blog-edit', id = blog.id )
 
 @login_required
 def editblog( request, id ):
