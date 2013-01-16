@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
@@ -65,3 +67,19 @@ class Account(models.Model):
             'progressive':True,
         },
     )
+
+#    def save(self, *args, **kwargs):
+#        import logging
+#        logger = logging.getLogger('zoki')
+#        logger.debug('save')
+#        super(Account, self).save(force_insert=True, force_update=True)
+
+#        try:
+#            old_obj = Picture.objects.get(pk=self.pk)
+#
+#            if old_obj.image.path != self.image.path:
+#                path = old_obj.image.path
+#                default_storage.delete(path)
+#
+#        except Picture.DoesNotExist: #нет картинки, значит ничего не удаляем.
+#            pass

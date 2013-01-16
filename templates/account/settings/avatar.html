@@ -5,16 +5,29 @@
 
 {% block content %}
 
-    [ {{ account.x150.url }} ]
     <div class="avatar">
         {% if account.avatar %}
-            <img src="" alt="">
+            <ul class="thumbnails">
+                <li class="thumbnail">
+                    <img src="{{ account.x150.url }}" alt="">
+                </li>
+                <li class="thumbnail">
+                    <img src="{{ account.x100.url }}" alt="">
+                </li>
+                <li class="thumbnail">
+                    <img src="{{ account.x50.url }}" alt="">
+                </li>
+            </ul>
+
+		{% else %}
+            <img src="{{ STATIC_URL }}img/no-avatar.jpg" alt="" style="width:150px; height: 150px;">
         {% endif %}
     </div>
 
 
 
     <form action="" method="post" enctype="multipart/form-data" class="form-inline">
+        {{ form.non_field_errors }}
 		{{ form|bootstrap }}
         <div class="form-actions">
             {% csrf_token %}
