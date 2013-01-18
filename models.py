@@ -11,7 +11,7 @@ def image_upload_to( instance, filename ):
     ext = filename.split( '.' )[-1]
     filename = "%s.%s" % ( uuid.uuid4(), ext.lower() )
     id = str( instance.user.id )
-    return 'account/%s/%s/%s' % ( id[:1], id, filenam   e )
+    return 'account/%s/%s/%s' % ( id[:1], id, filename )
 
 
 class Account(models.Model):
