@@ -20,10 +20,17 @@ def avatar(request, template_name = 'account/settings/avatar.html'):
     except Account.DoesNotExist:
         pass
 
-    form = AccountAvatarForm(initial={'user':user}, instance=account)
+    if account:
+        form = AccountAvatarForm(initial={'user': user}, instance=account)
+    else:
+        form = AccountAvatarForm(initial={'user': user})
 
     if request.method == "POST":
-        form = AccountAvatarForm( request.POST, request.FILES, initial={'user':user}, instance=account )
+        if account:
+            form = AccountAvatarForm(request.POST, request.FILES, initial={'user': user}, instance=account)
+        else:
+            form = AccountAvatarForm(request.POST, request.FILES, initial={'user': user})
+
         if form.is_valid():
             form.save()
             if settings.IN_PRODUCTION:
