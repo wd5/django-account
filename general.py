@@ -34,7 +34,8 @@ def avatar(request, template_name = 'account/settings/avatar.html'):
         if form.is_valid():
             form.save()
             if settings.IN_PRODUCTION:
-                mail_admins('user updated avatar', 'user %(user)s uploaded avatar %(avatar)r' % {'user': user.id, 'avatar': account.x150.url})
+#                mail_admins('user updated avatar', 'user %(user)s uploaded avatar %(avatar)r' % {'user': user.id, 'avatar': account.x150.url})
+                mail_admins('user updated avatar', 'user %(user)s uploaded avatar' % {'user': user.id,})
 
             return redirect('account:general-avatar')
 
