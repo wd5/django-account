@@ -15,6 +15,7 @@ def avatar(request, template_name = 'account/settings/avatar.html'):
     user = User.objects.get( pk = request.user.id )
 
     account = ''
+
     try:
         account = Account.objects.get(user=user)
     except Account.DoesNotExist:

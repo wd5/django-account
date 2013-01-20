@@ -15,7 +15,7 @@
         {% for blog in blogs %}
         <tr>
             <td>{{ blog.id }}</td>
-            <td><a href="{% url 'blogs-blog' id=blog.id slug=blog.slug %}">{{ blog.title }}</a></td>
+            <td><a href="{% url 'blog:blog' id=blog.id slug=blog.slug %}">{{ blog.title }}</a></td>
             <td>{{ blog.post_count }}</td>
             <td>{{ blog.comment_count }}</td>
             <td><a href="{% url 'account:blog-edit' id=blog.id %}">edit</a></td>
