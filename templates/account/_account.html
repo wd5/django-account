@@ -1,5 +1,7 @@
 {% extends "template.html" %}
 
+{% load i18n %}
+
 {% block wrapper %}
     <div class="container">
         <div class="row">
@@ -19,8 +21,8 @@
                         <li>
                             <ul class="nav nav-list">
                                 <li class="nav-header">Settings</li>
-                                <li><a href="{% url 'account:general-avatar' %}">Avatar</a></li>
-                                <li><a href="#">Password</a></li>                       
+                                <li><a href="{% url 'account:general-avatar' %}">{% trans 'avatar'|title %}</a></li>
+                                <li><a href="{% url 'account:general-password' %}">{% trans 'password'|title %}</a></li>
                             </ul>                            
                         </li>                                               
                     </ul>

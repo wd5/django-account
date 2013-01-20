@@ -10,7 +10,7 @@ from . models import Account
 from . forms import AccountAvatarForm
 
 @login_required
-def avatar(request, template_name = 'account/settings/avatar.html'):
+def avatar(request, template_name = 'account/general/avatar.html'):
 
     user = User.objects.get( pk = request.user.id )
 
@@ -45,4 +45,21 @@ def avatar(request, template_name = 'account/settings/avatar.html'):
         'account':account,
     }
 
+    return render(request, template_name, data)
+
+@login_required
+def password(request, template_name='account/general/password.html'):
+
+    user = User.objects.get(pk=request.user.id)
+
+    try:
+        account = Account.objects.get(user=user)
+    except Account.DoesNotExist:
+        pass
+
+
+    data = {
+        'form':form,
+        'account':account,
+    }
     return render(request, template_name, data)

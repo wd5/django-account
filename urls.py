@@ -13,6 +13,7 @@ urlpatterns = patterns( 'account',
     url( r'^editblog/(?P<id>\d+)$', 'blog.editblog', name = 'blog-edit' ),
     url( r'^deleteblog/(?P<id>\d+)$', 'blog.deleteblog', name = 'blog-delete' ),
 
-    url( r'^settings/avatar/', 'general.avatar', name='general-avatar' ),
+    url(r'^general/avatar/', 'general.avatar', name='general-avatar'),
+    url(r'^general/password/', 'general.password', name='general-password'),
  )
 
