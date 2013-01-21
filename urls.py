@@ -14,6 +14,6 @@ urlpatterns = patterns( 'account',
     url( r'^deleteblog/(?P<id>\d+)$', 'blog.deleteblog', name = 'blog-delete' ),
 
     url(r'^general/avatar/', 'general.avatar', name='general-avatar'),
-    url(r'^general/password/', 'general.password', name='general-password'),
+#    url(r'^general/password/', 'django.contrib.auth.views.password_change', {'template_name': 'account/general/password.html'}, name='general-password'),
  )
 

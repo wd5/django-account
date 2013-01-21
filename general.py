@@ -1,7 +1,7 @@
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import User
 from common.utils import log
 from django.core.mail import mail_admins
@@ -50,16 +50,17 @@ def avatar(request, template_name = 'account/general/avatar.html'):
 @login_required
 def password(request, template_name='account/general/password.html'):
 
-    user = User.objects.get(pk=request.user.id)
+    user = get_object_or_404(User, pk=request.user.id)
 
-    try:
-        account = Account.objects.get(user=user)
-    except Account.DoesNotExist:
-        pass
+
+
+#    try:
+#        account = Account.objects.get(user=user)
+#    except Account.DoesNotExist:
+#        pass
 
 
     data = {
         'form':form,
-        'account':account,
     }
     return render(request, template_name, data)
